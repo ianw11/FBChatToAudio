@@ -5,6 +5,10 @@ try:
 except:
    import xml.etree.ElementTree as ET
 
+if len(sys.argv) == 1:
+   print ("Don't forget to enter the name of the desired thread")
+   exit(0)
+
 #-----------------------------------------------#
 
 tree = ET.ElementTree(file='threads.xml')
@@ -72,11 +76,13 @@ for line in inFile:
 
 inFile.close()
 
-
-# Concatenate each audio file into a single file (using sox)
-command = ["sox"]
-for c in range(0, i):
-   command.append(str(c) + ".aiff")
-command.append("out.aiff")
-call (command)
+if i == 0:
+   print ("No files to convert to audio")
+else:
+   # Concatenate each audio file into a single file (using sox)
+   command = ["sox"]
+   for c in range(0, i):
+      command.append(str(c) + ".aiff")
+   command.append("out.aiff")
+   call (command)
 
