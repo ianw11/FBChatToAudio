@@ -1,14 +1,20 @@
+import sys
 from subprocess import call
+try:
+   import xml.etree.cElementTree as ET
+except:
+   import xml.etree.ElementTree as ET
 
-# College
-shitOnAndrew = 1133225216703161
-doItForTheStickers = 1471967949715240
+#-----------------------------------------------#
 
-# LO
-actuallyInTown = 976367965717672
+tree = ET.ElementTree(file='threads.xml')
+threads = {}
+root = tree.getroot()
+for child in root:
+   threads[child.attrib["name"]] = child.text.strip()
 
-# SET THIS TO CHANGE WHICH GROUP TO FOLLOW
-compInt = actuallyInTown
+
+compInt = int( threads[sys.argv[1]] )
 
 #-----------------------------------------------#
 
@@ -35,6 +41,11 @@ def say(name, msg, count):
       voice = "Lee"
    elif name == "Sam Worth":
       voice = "Tom"
+
+   elif name == "Andrew Pimentel":
+      voice = "Daniel"
+   elif name == "Nicholas Ross":
+      voice = "Oliver"
 
    call (["say", "-v", voice, "-o", str(count)+".aiff", msg])
 

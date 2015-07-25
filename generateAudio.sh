@@ -1,4 +1,4 @@
-python3 audio.py
+python3 audio.py $1
 
 mv out.aiff out.temp
 

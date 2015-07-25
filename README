@@ -24,8 +24,25 @@ How to run:
 
    At the same time, the facebook code that performs the login and keep-alive dumps messages to stderr.  This is why I redirect the js output to an out file.  This out file can be tailed.
 
+   ***************************
+
+   Before moving on, it should be noted that an xml file is required to open threads.
+   It should be formatted like the following:
+
+      <?xml version="1.0" encoding="UTF-8" ?>
+      <threads>
+         <thread name="ait" fullname="ACTUALLY in town">
+            976367965717672
+         </thread>
+         ...
+      </threads>
+
+   Where name is the parameter you'll pass in to the run script and the text is the value of the thread you want to turn to audio.  You can get the thread_id number in out.txt from the prior command.
+
+   ***************************
+
    At any point, while the js is running or after it's done, you can run
-   $ ./generateAudio.sh
+   $ ./generateAudio.sh <name (not id) of thread>
    to take all messages from a given thread_id and create an audio file from it.
 
    The audio file will be 'out.aiff'.
