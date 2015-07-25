@@ -1,0 +1,31 @@
+To run this set of software, the following must be observed:
+
+   1. This software only runs on OS X currently.  It relies on the 'say' command along with the output feature to create audio files.
+   2. Once audio is created, the python script uses 'sox' to concatenate each file into one final file.
+   3. There is a required, but not included, file called 'credentials.json' that is used to login to facebook.  I did not include mine because it has my password in plain-text.  To create your own, it just needs to be a json file with the following fields:
+         {
+            "username": <your facebook login>,
+            "password": <your facebook password
+         }
+
+      There is functionality to not include the password and instead enter it at runtime.  However doing so causes the stdin to be redirected so trying to kill the program with ctrl-c won't work.  If you are ok with running '$ kill <pid>' to close this software each time, that solution might be better.  However, for now the workaround is a static text file.
+
+   4. THIS CODE IS NOT READY TO BE RUN OUT OF THE BOX!  In the audio.py file, there is a way to change which voice corresponds to which person as well as a way to select which thread_id you want to follow.  These must be changed before you are ready to run.
+
+
+How to run:
+
+   $ node main.js > out.txt
+
+   This will login to your facebook account and dump all chat messages to the console in the following style:
+      <thread_id>
+      <name of sender>
+      <message>
+
+   At the same time, the facebook code that performs the login and keep-alive dumps messages to stderr.  This is why I redirect the js output to an out file.  This out file can be tailed.
+
+   At any point, while the js is running or after it's done, you can run
+   $ ./generateAudio.sh
+   to take all messages from a given thread_id and create an audio file from it.
+
+   The audio file will be 'out.aiff'.
